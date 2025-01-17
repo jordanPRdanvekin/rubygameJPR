@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    //variables invencibilidad
+    public float tiempoinv = 2.0f;
+    bool esInvencible;
+    float damaCooldown;
     //variables de salud
     public int vidamax = 5;
     int vidact;
@@ -21,7 +25,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //actualizamos la vida actual
-        vidact = 1;
+        vidact = vidamax;
         //obtenemos el rigidbody
         rb = GetComponent<Rigidbody2D>();
         // Habilita la acción de movimiento para que pueda ser utilizada.
@@ -35,6 +39,16 @@ public class PlayerController : MonoBehaviour
         move = MoveAction.ReadValue<Vector2>();
         // Imprime los valores del movimiento en la consola para depuración.
         //Debug.Log(move);
+        // cuando el personaje es invencible empieza el cooldown para dejar de serlo 
+        if (esInvencible)
+        {
+            damaCooldown = damaCooldown - Time.deltaTime;
+            if(damaCooldown < 0)
+            {
+                esInvencible = false;
+            }
+        }
+
 
     }
     //para cosas que cambian continuamente durante el juego 
@@ -48,6 +62,17 @@ public class PlayerController : MonoBehaviour
     }
     public void CambiarSalud(int amount)
     {
+        //si la cantidad recibida es negativa se trata de daño por lo tanto el personaje pasa a ser invencible durante un tiempo
+        if (amount < 0)
+        {
+            if (esInvencible)
+            { 
+                return;
+            }
+
+            esInvencible = true;
+            damaCooldown = tiempoinv;
+        }
         //con esta linea actualizamos la salud. clamp sirve para mantener la cantidad entre un valor minimo(0) y maximo(vidamax)
         vidact = Mathf.Clamp(vidact + amount, 0, vidamax);
         //devuelve en la consola el valor
