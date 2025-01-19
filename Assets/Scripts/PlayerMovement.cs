@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
         }
         //con esta linea actualizamos la salud. clamp sirve para mantener la cantidad entre un valor minimo(0) y maximo(vidamax)
         vidact = Mathf.Clamp(vidact + amount, 0, vidamax);
+        ContenedorVida.instancia.SetHealthValue(vidact / (float)vidamax);
         //devuelve en la consola el valor
         Debug.Log(vidact + "/" + vidamax);
 
