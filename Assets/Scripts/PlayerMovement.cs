@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +10,7 @@ public class PlayerController : MonoBehaviour
     //variables de salud
     public int vidamax = 5;
     int vidact;
-    public int salud { get{ return vidact;}}
+    public int salud { get { return vidact; } }
     // creamos variable de movimiento
     Vector2 move;
     //creamos el ribidbody de ruby
@@ -43,7 +41,7 @@ public class PlayerController : MonoBehaviour
         if (esInvencible)
         {
             damaCooldown = damaCooldown - Time.deltaTime;
-            if(damaCooldown < 0)
+            if (damaCooldown < 0)
             {
                 esInvencible = false;
             }
@@ -66,7 +64,7 @@ public class PlayerController : MonoBehaviour
         if (amount < 0)
         {
             if (esInvencible)
-            { 
+            {
                 return;
             }
 
