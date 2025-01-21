@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject preBala;
+    Animator animaJugador;
+    Vector2 animaVector = new Vector2(1, 0);
     //variables invencibilidad
     public float tiempoinv = 2.0f;
     bool esInvencible;
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour
     // Start es llamado antes del primer frame del juego.
     void Start()
     {
+        animaJugador = GetComponent<Animator>();
         //actualizamos la vida actual
         vidact = vidamax;
         //obtenemos el rigidbody
@@ -35,6 +39,16 @@ public class PlayerController : MonoBehaviour
     {
         // Obtiene el valor de movimiento del InputAction en formato Vector2.
         move = MoveAction.ReadValue<Vector2>();
+        if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+        {
+            animaVector.Set(move.x, move.y);
+            animaVector.Normalize();
+        }
+        //mandas valores al animator para que ejecute la accion correspondiente al movimiento vertical(y) u horizontal(x), y la velocidad
+        animaJugador.SetFloat("Look X", move.x);
+        animaJugador.SetFloat("Look Y", move.y);
+        animaJugador.SetFloat("Speed", move.magnitude);
+
         // Imprime los valores del movimiento en la consola para depuración.
         //Debug.Log(move);
         // cuando el personaje es invencible empieza el cooldown para dejar de serlo 
@@ -46,7 +60,10 @@ public class PlayerController : MonoBehaviour
                 esInvencible = false;
             }
         }
-
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Disparo();
+        }
 
     }
     //para cosas que cambian continuamente durante el juego 
@@ -70,13 +87,22 @@ public class PlayerController : MonoBehaviour
 
             esInvencible = true;
             damaCooldown = tiempoinv;
+            animaJugador.SetTrigger("Hit");
         }
+
         //con esta linea actualizamos la salud. clamp sirve para mantener la cantidad entre un valor minimo(0) y maximo(vidamax)
         vidact = Mathf.Clamp(vidact + amount, 0, vidamax);
         ContenedorVida.instancia.SetHealthValue(vidact / (float)vidamax);
         //devuelve en la consola el valor
         Debug.Log(vidact + "/" + vidamax);
 
+    }
+    void Disparo()
+    {
+        GameObject bala = Instantiate(preBala, rb.position + Vector2.up * 0.5f, Quaternion.identity);
+        BalaMovemen projectile = bala.GetComponent<BalaMovemen>();
+        projectile.Disparo(animaVector, 300);
+        animaJugador.SetTrigger("Launch");
     }
 }
 

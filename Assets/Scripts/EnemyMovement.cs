@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    Animator eneminacion;
     public float VelEnemy = 0.5f;
     Rigidbody2D enemyBody;
     bool verticalEnem;
@@ -11,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        eneminacion = GetComponent<Animator>();
         enemyBody = GetComponent<Rigidbody2D>();
         temporizador = tiempoCambio;
     }
@@ -30,12 +32,17 @@ public class EnemyMovement : MonoBehaviour
         if (verticalEnem)
         {
             position.y = position.y + VelEnemy * direccion * Time.deltaTime;
+            eneminacion.SetFloat("moveX", 0);
+            eneminacion.SetFloat("moveY", direccion);
         }
         else
         {
             position.x = position.x + VelEnemy * direccion * Time.deltaTime;
+            eneminacion.SetFloat("moveX", direccion);
+            eneminacion.SetFloat("moveY", 0);
         }
         enemyBody.MovePosition(position);
+
     }
     void OnTriggerEnter2D(Collider2D Otros)
     {

@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CuraZona : MonoBehaviour
 {
-    
+
     public float cooldownCura;
     float tiempoCura;
     private void Start()
@@ -15,7 +13,7 @@ public class CuraZona : MonoBehaviour
     {
         PlayerController jugador = objeto.GetComponent<PlayerController>();
         //comprobamos si un objeto toco el item y si la salud es menos que la maxima 
-       
+
         if (objeto != null && tiempoCura < 0)
         {
             jugador.CambiarSalud(1);
