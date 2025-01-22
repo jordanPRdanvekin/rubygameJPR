@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public InputAction Hablar;
     public GameObject preBala;
     Animator animaJugador;
     Vector2 animaVector = new Vector2(1, 0);
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     // Start es llamado antes del primer frame del juego.
     void Start()
     {
+        Hablar.Enable();
         animaJugador = GetComponent<Animator>();
         //actualizamos la vida actual
         vidact = vidamax;
@@ -39,6 +41,10 @@ public class PlayerController : MonoBehaviour
     {
         // Obtiene el valor de movimiento del InputAction en formato Vector2.
         move = MoveAction.ReadValue<Vector2>();
+        if (Hablar.triggered)
+        {
+            Conversar();
+        }
         if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
             animaVector.Set(move.x, move.y);
@@ -103,6 +109,15 @@ public class PlayerController : MonoBehaviour
         BalaMovemen projectile = bala.GetComponent<BalaMovemen>();
         projectile.Disparo(animaVector, 300);
         animaJugador.SetTrigger("Launch");
+    }
+    void Conversar()
+    {
+        //el jugador ''busca'' a los npcs segun la posicion, hacia donde se esta moviendo, la distancia que hay, y la capa en la que esta 
+        RaycastHit2D hit = Physics2D.Raycast(rb.position + Vector2.up * 0.2f, move, 1.5f, LayerMask.GetMask("NPC"));
+        if (hit.collider != null)
+        {
+            ContenedorVida.instancia.Dialogando();
+        }
     }
 }
 

@@ -100,6 +100,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b965f53d6eede7446a9b349eb738953a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hablar:
+    m_Name: Hablar
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6d78bce7-b274-43c6-8d3b-0750a2997273
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 549fba0e-b639-4823-b2ac-03ed24f8cda3
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Hablar
+      m_Flags: 0
+    m_Flags: 0
   preBala: {fileID: 7818682212631174391, guid: 5de56189fe8de17489d7f692c707e5d7, type: 3}
   tiempoinv: 1
   vidamax: 5
@@ -175,7 +192,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move
       m_Flags: 8
-    - m_Name: left
+    - m_Name: right
       m_Id: c6a1d09a-970f-4e07-bf3c-23ff540f06c2
       m_Path: <Keyboard>/rightArrow
       m_Interactions: 
@@ -183,7 +200,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move
       m_Flags: 8
-    - m_Name: right
+    - m_Name: left
       m_Id: eaed3e1d-0e0d-498a-be51-6db8567e0114
       m_Path: <Keyboard>/leftArrow
       m_Interactions: 

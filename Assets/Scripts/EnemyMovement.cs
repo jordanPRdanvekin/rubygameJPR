@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    bool roto = true;
     Animator eneminacion;
     public float VelEnemy = 0.5f;
     Rigidbody2D enemyBody;
@@ -28,6 +29,12 @@ public class EnemyMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        //comprobamos si no esta roto(!roto), si no lo esta saldremos de este script evitando que se mueva el enemigo
+        if (!roto)
+        {
+            return;
+        }
+        // si esta roto (sin la !) continua el script haciendo en este caso que se mueva el enemigo
         Vector2 position = enemyBody.position;
         if (verticalEnem)
         {
@@ -43,6 +50,7 @@ public class EnemyMovement : MonoBehaviour
         }
         enemyBody.MovePosition(position);
 
+
     }
     void OnTriggerEnter2D(Collider2D Otros)
     {
@@ -52,5 +60,12 @@ public class EnemyMovement : MonoBehaviour
             jugador.CambiarSalud(-1);
         }
 
+    }
+    public void arreglar()
+    {
+        //repara el enemigo y lo hace ''atrabesable'' ya que ya no es enemigo 
+        roto = false;
+        enemyBody.simulated = false;
+        eneminacion.SetTrigger("arreglado");
     }
 }
