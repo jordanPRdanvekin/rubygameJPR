@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ItemCura : MonoBehaviour
 {
+    public AudioClip sonido;
+
     public int cantidad;
     void OnTriggerEnter2D(Collider2D objeto)
     {
@@ -11,7 +13,9 @@ public class ItemCura : MonoBehaviour
         {
             Debug.Log("fui tocado por " + objeto + " D:");
             jugador.CambiarSalud(cantidad);
+            jugador.Musica(sonido);
             Destroy(gameObject);
+
         }
     }
 }

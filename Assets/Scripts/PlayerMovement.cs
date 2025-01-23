@@ -3,6 +3,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    AudioSource Sonido;
+    public AudioClip uff;
+    public AudioClip lanzar;
+
+
     public InputAction Hablar;
     public GameObject preBala;
     Animator animaJugador;
@@ -26,6 +31,7 @@ public class PlayerController : MonoBehaviour
     // Start es llamado antes del primer frame del juego.
     void Start()
     {
+        Sonido = GetComponent<AudioSource>();
         Hablar.Enable();
         animaJugador = GetComponent<Animator>();
         //actualizamos la vida actual
@@ -94,6 +100,7 @@ public class PlayerController : MonoBehaviour
             esInvencible = true;
             damaCooldown = tiempoinv;
             animaJugador.SetTrigger("Hit");
+            Sonido.PlayOneShot(uff);
         }
 
         //con esta linea actualizamos la salud. clamp sirve para mantener la cantidad entre un valor minimo(0) y maximo(vidamax)
@@ -109,6 +116,7 @@ public class PlayerController : MonoBehaviour
         BalaMovemen projectile = bala.GetComponent<BalaMovemen>();
         projectile.Disparo(animaVector, 300);
         animaJugador.SetTrigger("Launch");
+        Sonido.PlayOneShot(lanzar);
     }
     void Conversar()
     {
@@ -118,6 +126,11 @@ public class PlayerController : MonoBehaviour
         {
             ContenedorVida.instancia.Dialogando();
         }
+    }
+    public void Musica(AudioClip clip)
+    {
+        //se reproduse una sola vez (oneshot)
+        Sonido.PlayOneShot(clip);
     }
 }
 

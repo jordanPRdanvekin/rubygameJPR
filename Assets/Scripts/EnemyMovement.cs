@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+     public ParticleSystem humo;
+
+    AudioSource sonido;
+    public AudioClip arreglado;
+
     bool roto = true;
     Animator eneminacion;
     public float VelEnemy = 0.5f;
@@ -13,6 +18,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sonido = GetComponent<AudioSource>();
         eneminacion = GetComponent<Animator>();
         enemyBody = GetComponent<Rigidbody2D>();
         temporizador = tiempoCambio;
@@ -67,5 +73,8 @@ public class EnemyMovement : MonoBehaviour
         roto = false;
         enemyBody.simulated = false;
         eneminacion.SetTrigger("arreglado");
+        sonido.Stop();
+        sonido.PlayOneShot(arreglado);
+        humo.Stop();
     }
 }

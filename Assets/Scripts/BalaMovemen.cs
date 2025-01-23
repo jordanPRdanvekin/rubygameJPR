@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class BalaMovemen : MonoBehaviour
 {
+    AudioSource sonido;
+    public AudioClip colision;
+
     public float Rango = 100.0f;
     Rigidbody2D balarb;
     void Awake()
     {
+        sonido = GetComponent<AudioSource>();
         balarb = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
         if (transform.position.magnitude > Rango)
         {
+            sonido.PlayOneShot(colision);
             Destroy(gameObject);
         }
     }
@@ -28,6 +33,7 @@ public class BalaMovemen : MonoBehaviour
             Enemy.arreglar();
         }
         Debug.Log("Haz disparado a " + Victima.gameObject + " !");
+        sonido.PlayOneShot(colision);
         Destroy(gameObject);
     }
 }
