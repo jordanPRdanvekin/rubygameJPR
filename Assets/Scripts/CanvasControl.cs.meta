@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 5559e24cd688fab4198726ef803375d2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - cavas: {instanceID: 0}
+  - activo: {fileID: 8300000, guid: 71b2b5c78f669394b830838cdbc6fbc1, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
