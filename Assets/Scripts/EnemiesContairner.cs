@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class EnemiesContairner : MonoBehaviour
 {
@@ -8,12 +9,15 @@ public class EnemiesContairner : MonoBehaviour
     int EnemigosTotal = 0;
     [SerializeField]
     string Contador;
+    [SerializeField]
+    TextMeshProUGUI contador;
     public static EnemiesContairner instanciaEnem { get; private set; }
     private void Awake()
     {
         instanciaEnem = this;
         EnemigosRestantes = EnemigosTotal;
     } 
+
     /// <summary>
     /// dos funciones una que suma y una que resta dichas funcciones se llamaran cuando se detecte cambios en los enemigos 
     /// uno suma en total ya que es el contador de cuantos enemigos hay
@@ -25,12 +29,16 @@ public class EnemiesContairner : MonoBehaviour
         EnemigosTotal += 1;
         EnemigosRestantes += 1;
         Debug.Log("hay " + EnemigosRestantes + " de " + EnemigosTotal);
+        //el toString convierte numeros en texto (String) la variable de letras. 
+        contador.text = EnemigosRestantes.ToString() + "/" + EnemigosTotal.ToString();
 
     }
     public void RemoveEnemie()
     {
         EnemigosRestantes -= 1;
         Debug.Log("hay " + EnemigosRestantes + " de " + EnemigosTotal);
+        //el toString convierte numeros en texto (String) la variable de letras. 
+        contador.text = EnemigosRestantes.ToString() + "/" + EnemigosTotal.ToString();
 
     }
 }

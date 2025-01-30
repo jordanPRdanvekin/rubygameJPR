@@ -13,6 +13,7 @@ public class BottonReset : MonoBehaviour
     }
     public void Reinicio()
     {
+        Time.timeScale = 1;
         //es una funcion que me permite reiniciar la escena activa desde 0 reejecutandola
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

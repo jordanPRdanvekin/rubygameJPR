@@ -2393,8 +2393,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285191786
-  m_fontColor: {r: 0.41684657, g: 0.8396226, b: 0.41585082, a: 1}
+    rgba: 4278386835
+  m_fontColor: {r: 0.5754717, g: 0, b: 0.010618426, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6660,6 +6660,7 @@ MonoBehaviour:
   EnemigosRestantes: 1
   EnemigosTotal: 0
   Contador: 
+  contador: {fileID: 1136385776}
 --- !u!1 &2041773367
 GameObject:
   m_ObjectHideFlags: 0
