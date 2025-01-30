@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-     public ParticleSystem humo;
+    public ParticleSystem humo;
 
     AudioSource sonido;
     public AudioClip arreglado;
-
     bool roto = true;
     Animator eneminacion;
     public float VelEnemy = 0.5f;
@@ -15,9 +14,10 @@ public class EnemyMovement : MonoBehaviour
     public float tiempoCambio = 3.0f;
     float temporizador;
     int direccion = 1;
-    // Start is called before the first frame update
+
     void Start()
-    {
+    { //la logica es que por cada enemigo se ejecute el contador addenemy por lo que lo logico seria que se ejecute una unica ves por enemigo
+        EnemiesContairner.instanciaEnem.AddEnemie();
         sonido = GetComponent<AudioSource>();
         eneminacion = GetComponent<Animator>();
         enemyBody = GetComponent<Rigidbody2D>();
@@ -76,5 +76,6 @@ public class EnemyMovement : MonoBehaviour
         sonido.Stop();
         sonido.PlayOneShot(arreglado);
         humo.Stop();
+        EnemiesContairner.instanciaEnem.RemoveEnemie();
     }
 }
